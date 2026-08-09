@@ -24,7 +24,7 @@ An AXI-compliant CLI tool for generating memes using the ImgFlip API with advanc
 curl -fsSL https://raw.githubusercontent.com/ishan-parihar/meme-lyr/main/install.sh | bash
 ```
 
-This will install the CLI globally on your system using npm.
+This will install the CLI globally on your system using npm and automatically install the AI agent skill to `~/.agents/skills/`.
 
 > **Note**: The installation script requires the repository to be published on GitHub. For local development, use the manual install method below.
 
@@ -32,6 +32,12 @@ This will install the CLI globally on your system using npm.
 
 ```bash
 npm install -g meme-lyr
+```
+
+After installation, manually install the AI agent skill:
+
+```bash
+cp -r skills/meme-lyr ~/.agents/skills/
 ```
 
 Or use without installation:
@@ -61,6 +67,11 @@ npm run build
 4. Install globally:
 ```bash
 npm install -g .
+```
+
+5. Install AI agent skill:
+```bash
+cp -r skills/meme-lyr ~/.agents/skills/
 ```
 
 ## Configuration
@@ -260,7 +271,7 @@ meme-lyr config --username myuser --password mypass --default-background light-b
 
 Configuration is stored in `~/.meme-lyr/config.json` and used for all CLI commands.
 
-## AI Agent Skill Installation
+## AI Agent Skill
 
 The meme-lyr CLI includes a dedicated AI agent skill for autonomous meme generation with intelligent aspect ratio detection. This skill enables AI agents to automatically select appropriate aspect ratios based on platform context:
 
@@ -270,12 +281,11 @@ The meme-lyr CLI includes a dedicated AI agent skill for autonomous meme generat
 - **Landscape** → 16:9 (YouTube, Twitter)
 - **Default** → 4:5 (when no platform specified)
 
-### Install the Skill
+### Skill Installation
 
-The skill is included in the repository under `skills/meme-lyr/`. To install it:
+The skill is automatically installed to `~/.agents/skills/meme-lyr/` when using the quick install script. For manual installation, copy the skill directory:
 
 ```bash
-# Copy the skill to your agent skills directory
 cp -r skills/meme-lyr ~/.agents/skills/
 ```
 
