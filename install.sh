@@ -31,6 +31,20 @@ npm install -g .
 if [ $? -eq 0 ]; then
     echo "✅ meme-lyr installed successfully!"
     echo ""
+    echo "🤖 Installing AI agent skill..."
+    
+    # Create skills directory if it doesn't exist
+    mkdir -p ~/.agents/skills
+    
+    # Copy the skill to the agent skills directory
+    if [ -d "skills/meme-lyr" ]; then
+        cp -r skills/meme-lyr ~/.agents/skills/
+        echo "✅ AI agent skill installed to ~/.agents/skills/meme-lyr"
+    else
+        echo "⚠️  AI agent skill directory not found. Skill installation skipped."
+    fi
+    
+    echo ""
     echo "🎉 Installation complete!"
     echo ""
     echo "📝 To get started:"
@@ -50,6 +64,8 @@ if [ $? -eq 0 ]; then
     echo "🔗 Create your ImgFlip account at https://imgflip.com/signup"
     echo ""
     echo "📖 For more information, run: meme-lyr --help"
+    echo ""
+    echo "🤖 AI agent skill is now available for autonomous meme generation"
 else
     echo "❌ Installation failed. Please check the error messages above."
     exit 1
