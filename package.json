@@ -19,7 +19,8 @@
     "build": "tsc && chmod +x dist/*.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "dependencies": {
     "axios": "^1.8.2",

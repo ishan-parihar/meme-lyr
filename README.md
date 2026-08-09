@@ -14,6 +14,7 @@ An AXI-compliant CLI tool for generating memes using the ImgFlip API with advanc
 - **Carousel Generation**: Create multiple meme variations for Instagram carousels
 - **Image Processing**: Built-in Sharp-powered image manipulation
 - **Configuration Management**: Store credentials and preferences in `~/.meme-lyr/config.json`
+- **AI Agent Skill**: Dedicated skill for autonomous meme generation with intelligent aspect ratio detection
 
 ## Installation
 
@@ -259,6 +260,35 @@ meme-lyr config --username myuser --password mypass --default-background light-b
 
 Configuration is stored in `~/.meme-lyr/config.json` and used for all CLI commands.
 
+## AI Agent Skill Installation
+
+The meme-lyr CLI includes a dedicated AI agent skill for autonomous meme generation with intelligent aspect ratio detection. This skill enables AI agents to automatically select appropriate aspect ratios based on platform context:
+
+- **Stories** → 9:16 (Instagram Stories, Facebook Stories, TikTok)
+- **Posts/Carousel** → 4:5 (Instagram Feed, Facebook Feed, LinkedIn)
+- **Square** → 1:1 (only on explicit request)
+- **Landscape** → 16:9 (YouTube, Twitter)
+- **Default** → 4:5 (when no platform specified)
+
+### Install the Skill
+
+The skill is included in the repository under `skills/meme-lyr/`. To install it:
+
+```bash
+# Copy the skill to your agent skills directory
+cp -r skills/meme-lyr ~/.agents/skills/
+```
+
+### Skill Features
+
+- **Automatic aspect ratio detection** based on platform context
+- **Template selection guidance** for different content themes
+- **Platform-specific optimization** for social media
+- **Intelligent command generation** for meme-lyr CLI
+- **Error handling** with actionable suggestions
+
+The skill loads on demand when AI agents recognize meme generation tasks, providing zero-overhead for non-meme conversations while delivering intelligent meme creation when needed.
+
 #### `help` - Show help information
 
 ```bash
@@ -339,8 +369,8 @@ This CLI follows AXI (Agent eXperience Interface) standards:
 - `1`: Error
 - `2`: Usage error (missing required flags, unknown flags, etc.)
 
-## Author
+## Credits
 
-This project is created for fun by [Vladimir Haltakov](https://haltakov.net). If you find it interesting you can message me on X [@haltakov](https://x.com/haltakov).
+Original project by [Vladimir Haltakov](https://haltakov.net). For inquiries, message on X [@haltakov](https://x.com/haltakov).
 
-AXI compliance implementation and aspect ratio features by [Ishan Parihar](https://github.com/ishan-parihar).
+AXI compliance implementation, aspect ratio features, and AI agent skill integration by [Ishan Parihar](https://github.com/ishan-parihar).

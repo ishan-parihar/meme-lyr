@@ -1,0 +1,35 @@
+{
+  "skill_name": "meme-lyr",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a meme for an Instagram story about Monday morning productivity",
+      "expected_output": "Should detect 'Instagram story' and use 9:16 aspect ratio. Should select an appropriate template for productivity theme (like Drake Hotline Bling or similar). Should generate a command like: meme-lyr carousel <template-id> --text0 \"Monday morning\" --text1 \"Productive mode\" --aspect-ratio 9:16",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Make a carousel post for Instagram about work-life balance",
+      "expected_output": "Should detect 'carousel post' and use 4:5 aspect ratio. Should select a template suitable for work-life balance theme (like Distracted Boyfriend). Should generate a command with 4:5 aspect ratio.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Create a square meme about coding challenges",
+      "expected_output": "Should detect 'square' and use 1:1 aspect ratio (explicit request). Should select a coding-related template like 'One Does Not Simply'. Should generate a command with 1:1 aspect ratio.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Generate a meme for a YouTube thumbnail about tech reviews",
+      "expected_output": "Should detect 'YouTube' and use 16:9 aspect ratio. Should select an appropriate template for tech content. Should generate a command with 16:9 aspect ratio.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Make a meme about procrastination",
+      "expected_output": "Should default to 4:5 aspect ratio (posts/carousel most common when no platform specified). Should select a template suitable for procrastination theme.",
+      "files": []
+    }
+  ]
+}
