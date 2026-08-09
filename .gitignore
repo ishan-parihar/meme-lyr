@@ -1,3 +1,24 @@
-dist/
+# Dependencies
 node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+
+# Config files (sensitive data)
+.meme-lyr/
+
+# Test files
+test_*.png
+debug_*.png
+
+# OS files
 .DS_Store
+Thumbs.db

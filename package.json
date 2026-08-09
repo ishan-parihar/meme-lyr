@@ -1,6 +1,6 @@
 {
-  "name": "meme-mcp",
-  "version": "1.0.1",
+  "name": "meme-cli",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "license": "Apache-2.0",
   "author": {
@@ -8,13 +8,13 @@
     "url": "https://haltakov.net"
   },
   "bin": {
-    "meme-mcp": "dist/index.js"
+    "meme-lyr": "dist/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/haltakov/meme-mcp"
+    "url": "https://github.com/ishan-parihar/meme-lyr"
   },
-  "homepage": "https://github.com/haltakov/meme-mcp",
+  "homepage": "https://github.com/ishan-parihar/meme-lyr",
   "scripts": {
     "build": "tsc && chmod +x dist/*.js"
   },
@@ -22,13 +22,15 @@
     "dist"
   ],
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.6.1",
     "axios": "^1.8.2",
-    "zod": "^3.24.2"
+    "sharp": "^0.33.5"
   },
   "type": "module",
   "devDependencies": {
     "@types/node": "^22.13.9",
     "typescript": "^5.8.2"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
   }
 }
