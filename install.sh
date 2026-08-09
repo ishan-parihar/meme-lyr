@@ -36,12 +36,43 @@ if [ $? -eq 0 ]; then
     # Create skills directory if it doesn't exist
     mkdir -p ~/.agents/skills
     
-    # Copy the skill to the agent skills directory
+    # Try to find the skill directory in various locations
+    SKILL_SOURCE=""
+    
+    # Check current directory (for local installs)
     if [ -d "skills/meme-lyr" ]; then
-        cp -r skills/meme-lyr ~/.agents/skills/
-        echo "✅ AI agent skill installed to ~/.agents/skills/meme-lyr"
+        SKILL_SOURCE="skills/meme-lyr"
+    # Check npm global directory (for npm installs)
+    elif [ -d "$(npm root -g)/meme-lyr/skills/meme-lyr" ]; then
+        SKILL_SOURCE="$(npm root -g)/meme-lyr/skills/meme-lyr"
+    # Check if we can download from repository
     else
-        echo "⚠️  AI agent skill directory not found. Skill installation skipped."
+        echo "📥 Downloading skill from repository..."
+        TEMP_DIR=$(mktemp -d)
+        if curl -fsSL https://raw.githubusercontent.com/ishan-parihar/meme-lyr/main/skills/meme-lyr/SKILL.md -o "$TEMP_DIR/SKILL.md"; then
+            mkdir -p "$TEMP_DIR/meme-lyr"
+            mv "$TEMP_DIR/SKILL.md" "$TEMP_DIR/meme-lyr/"
+            # Try to download evals as well
+            curl -fsSL https://raw.githubusercontent.com/ishan-parihar/meme-lyr/main/skills/meme-lyr/evals/evals.json -o "$TEMP_DIR/meme-lyr/evals.json" 2>/dev/null || true
+            if [ -f "$TEMP_DIR/meme-lyr/SKILL.md" ]; then
+                mkdir -p "$TEMP_DIR/meme-lyr/evals"
+                [ -f "$TEMP_DIR/meme-lyr/evals.json" ] && mv "$TEMP_DIR/meme-lyr/evals.json" "$TEMP_DIR/meme-lyr/evals/"
+                SKILL_SOURCE="$TEMP_DIR/meme-lyr"
+            fi
+        fi
+    fi
+    
+    # Copy the skill to the agent skills directory
+    if [ -n "$SKILL_SOURCE" ] && [ -d "$SKILL_SOURCE" ]; then
+        cp -r "$SKILL_SOURCE" ~/.agents/skills/
+        echo "✅ AI agent skill installed to ~/.agents/skills/meme-lyr"
+        # Clean up temp directory if we used it
+        if [ -n "$TEMP_DIR" ]; then
+            rm -rf "$TEMP_DIR"
+        fi
+    else
+        echo "⚠️  AI agent skill directory not found. Manual installation required:"
+        echo "   cp -r skills/meme-lyr ~/.agents/skills/"
     fi
     
     echo ""
