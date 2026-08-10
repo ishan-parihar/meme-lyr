@@ -26,3 +26,13 @@ debug_*.png
 # OS files
 .DS_Store
 Thumbs.db
+# ---- tool-state / session artifacts (never commit) ----
+.cortexkit/
+.contexty/
+.hive/
+.memsearch/
+.opencode/
+.cortex/
+.sisyphus/
+.oh-my-opencode/
+.history/
