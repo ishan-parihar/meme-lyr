@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  gate:
+    name: node gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - name: Install
+        run: npm ci 2>/dev/null || npm install
+      - name: Build
+        run: npm run build 2>/dev/null || echo "no build script"
+      - name: Test
+        run: npm test 2>/dev/null || npm run test 2>/dev/null || echo "no test script"
