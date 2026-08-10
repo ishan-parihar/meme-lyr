@@ -3,6 +3,7 @@
 <!-- T2I HERO SPEC — Subject: a meme generation CLI — a meme template library (top/bottom text panels) on the left, an MCP server stamping finished meme images on the right; comedy timing icons (clock, punchline). Composition: template shelf → stamp → meme wall. Palette: meme yellow #facc15 → dark slate → punchline pink #ec4899. Style: playful flat vector, sticker aesthetic, no text. 16:9. -->
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)
+[![CI](https://github.com/ishan-parihar/meme-lyr/actions/workflows/ci.yml/badge.svg)](https://github.com/ishan-parihar/meme-lyr/actions/workflows/ci.yml)
 ![MCP](https://img.shields.io/badge/MCP-Server-orange?logo=modelcontextprotocol)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
