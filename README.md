@@ -1,5 +1,11 @@
 # Meme CLI
 
+<!-- T2I HERO SPEC — Subject: a meme generation CLI — a meme template library (top/bottom text panels) on the left, an MCP server stamping finished meme images on the right; comedy timing icons (clock, punchline). Composition: template shelf → stamp → meme wall. Palette: meme yellow #facc15 → dark slate → punchline pink #ec4899. Style: playful flat vector, sticker aesthetic, no text. 16:9. -->
+
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python)
+![MCP](https://img.shields.io/badge/MCP-Server-orange?logo=modelcontextprotocol)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 An AXI-compliant CLI tool for generating memes using the ImgFlip API with advanced aspect ratio support for social media platforms. This tool provides a token-efficient, agent-friendly interface for autonomous AI agents to generate memes from popular templates optimized for Instagram, TikTok, YouTube, and more.
 
 ## Features
@@ -384,3 +390,58 @@ This CLI follows AXI (Agent eXperience Interface) standards:
 Original project by [Vladimir Haltakov](https://haltakov.net). For inquiries, message on X [@haltakov](https://x.com/haltakov).
 
 AXI compliance implementation, aspect ratio features, and AI agent skill integration by [Ishan Parihar](https://github.com/ishan-parihar).
+## Example Output
+
+### TOON Output (default)
+
+```
+meme_template:
+  id: 181913649
+  name: Distracted Boyfriend
+  box_count: 2
+  width: 1200
+  height: 800
+
+fetched_memes:
+  - Distracted Boyfriend (2 boxes)
+  - Drake Hotline Bling (2 boxes)
+  - Two Buttons (2 boxes)
+  - Change My Mind (1 box)
+  - Expanding Brain (4 panels)
+
+generated:
+  template: Distracted Boyfriend
+  top_text: "When the build passes"
+  bottom_text: "But you didn't write tests"
+  output: ./output/distracted_boyfriend_20260810.png
+  size: 1200x800
+  aspect_ratio: 1:1 (Instagram default)
+  background: "#000000"
+```
+
+### JSON Output (--format json)
+
+```json
+{
+  "template": "Distracted Boyfriend",
+  "boxes": [
+    {"text": "When the build passes", "color": "#ffffff", "outline": "#000000"},
+    {"text": "But you didn't write tests", "color": "#ffffff", "outline": "#000000"}
+  ],
+  "output": "./output/distracted_boyfriend_20260810.png",
+  "meta": {"aspect_ratio": "1:1", "background": "#000000"}
+}
+```
+
+### Carousel Generation
+
+```bash
+# Generate 5 meme variations for an Instagram carousel
+meme-lyr generate --template "Distracted Boyfriend" \
+  --variations 5 \
+  --aspect-ratio 1:1 \
+  --output ./carousel/
+```
+
+---
+
