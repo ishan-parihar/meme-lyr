@@ -3,7 +3,7 @@
 import axios from "axios";
 import sharp from "sharp";
 import { writeFile, mkdir, readFile } from "fs/promises";
-import { existsSync } from "fs";
+import { existsSync, realpathSync } from "fs";
 import os from "os";
 import path from "path";
 import { pathToFileURL } from "url";
@@ -790,8 +790,12 @@ async function main(): Promise<void> {
 }
 
 // Run only when invoked directly as a CLI (never when imported by tests).
+// realpathSync is required because the npm `bin` entry is a symlink: under a
+// global/`node_modules/.bin` install, process.argv[1] is the *symlink* path
+// while import.meta.url is the resolved real file URL — without realpath the
+// guard silently disables the CLI.
 const isMain = process.argv[1]
-  && import.meta.url === pathToFileURL(process.argv[1]).href;
+  && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
 if (isMain) {
   main().catch(error => {
     outputError(
