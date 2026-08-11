@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/ishan-parihar/meme-lyr",
   "scripts": {
-    "build": "tsc && chmod +x dist/*.js"
+    "build": "tsc && chmod +x dist/*.js",
+    "test": "vitest run"
   },
   "files": [
     "dist",
@@ -29,7 +30,8 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^22.13.9",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "^4.1.10"
   },
   "allowScripts": {
     "sharp@0.33.5": true

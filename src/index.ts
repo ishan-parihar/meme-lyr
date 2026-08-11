@@ -6,6 +6,7 @@ import { writeFile, mkdir, readFile } from "fs/promises";
 import { existsSync } from "fs";
 import os from "os";
 import path from "path";
+import { pathToFileURL } from "url";
 
 // Types
 interface MemeTemplate {
@@ -71,7 +72,7 @@ interface AspectRatioConfig {
   platforms: string[];
 }
 
-const ASPECT_RATIOS: Record<AspectRatio, AspectRatioConfig> = {
+export const ASPECT_RATIOS: Record<AspectRatio, AspectRatioConfig> = {
   '1:1': {
     name: 'Square',
     width: 1080,
@@ -115,7 +116,7 @@ interface BackgroundConfig {
   color: BackgroundColor;
 }
 
-const BACKGROUND_COLORS: BackgroundColor[] = [
+export const BACKGROUND_COLORS: BackgroundColor[] = [
   { name: 'white', hex: '#FFFFFF', rgb: [255, 255, 255] },
   { name: 'black', hex: '#000000', rgb: [0, 0, 0] },
   { name: 'gray', hex: '#808080', rgb: [128, 128, 128] },
@@ -176,7 +177,7 @@ function outputError(message: string, help: string, exitCode: number = 2): void 
   process.exit(exitCode);
 }
 
-function truncateText(text: string, maxLength: number = 500): string {
+export function truncateText(text: string, maxLength: number = 500): string {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + `\n    ... (truncated, ${text.length} chars total)`;
 }
@@ -238,7 +239,7 @@ async function processImageWithAspectRatio(
   }
 }
 
-function getBackgroundColor(colorName: string): BackgroundColor {
+export function getBackgroundColor(colorName: string): BackgroundColor {
   const color = BACKGROUND_COLORS.find(c => c.name === colorName);
   if (!color) {
     throw new Error(`Invalid background color: ${colorName}. Available colors: ${BACKGROUND_COLORS.map(c => c.name).join(', ')}`);
@@ -246,7 +247,7 @@ function getBackgroundColor(colorName: string): BackgroundColor {
   return color;
 }
 
-function parseBackgroundConfig(background: string, blur: string, blurIntensity: string): BackgroundConfig {
+export function parseBackgroundConfig(background: string, blur: string, blurIntensity: string): BackgroundConfig {
   // Blur backgrounds are currently disabled
   const colorName = background || 'white';
   const color = getBackgroundColor(colorName);
@@ -614,7 +615,8 @@ function cmdHelp(command?: string): void {
 }
 
 // Argument parsing
-function parseArgs(args: string[]): { command: Command; params: Record<string, string> } {
+// Exported for unit testing; on invalid flags it reports the error and exits.
+export function parseArgs(args: string[]): { command: Command; params: Record<string, string> } {
   const params: Record<string, string> = {};
   let command: Command = "list"; // default command
   let helpTarget: string | undefined;
@@ -787,11 +789,15 @@ async function main(): Promise<void> {
   }
 }
 
-// Run
-main().catch(error => {
-  outputError(
-    error instanceof Error ? error.message : "Unknown error",
-    "Run --help for usage information",
-    1
-  );
-});
+// Run only when invoked directly as a CLI (never when imported by tests).
+const isMain = process.argv[1]
+  && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isMain) {
+  main().catch(error => {
+    outputError(
+      error instanceof Error ? error.message : "Unknown error",
+      "Run --help for usage information",
+      1
+    );
+  });
+}
