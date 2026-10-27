@@ -429,6 +429,8 @@ This CLI follows AXI (Agent eXperience Interface) standards:
 - `1`: Error
 - `2`: Usage error (missing required flags, unknown flags, etc.)
 
+How the parts fit together, and the order to read them in: [docs/OUTLINE.md](docs/OUTLINE.md).
+
 ## Credits
 
 Original project by [Vladimir Haltakov](https://haltakov.net). For inquiries, message on X [@haltakov](https://x.com/haltakov).
